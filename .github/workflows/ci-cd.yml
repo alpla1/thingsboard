@@ -64,7 +64,7 @@ jobs:
         run: mvn -pl common test
 
       - name: Run dao module tests
-        run: mvn -pl dao -Dtest=*ValidatorTest test
+        run: mvn -pl dao -am -Dtest=*ValidatorTest test
 
       - name: Run edqs module tests
         run: mvn -pl edqs test
