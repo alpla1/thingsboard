@@ -40,9 +40,7 @@ jobs:
           cache: maven
 
       - name: Build ThingsBoard
-        # Nous faisons package au lieu de install, car package est plus léger.
-        # install ajoute des operations inutiles pour les tests.
-        run: mvn -T 2 clean package -DskipTests
+        run: mvn -T 2 clean install -DskipTests
 
   unit-tests:
     name: Unit tests
@@ -62,6 +60,9 @@ jobs:
 
       - name: Run common module tests
         run: mvn -pl common test
+
+      - name: Run dao module tests
+        run: mvn -pl dao -am -Dtest=*ValidatorTest test
 
       - name: Run edqs module tests
         run: mvn -pl edqs test
