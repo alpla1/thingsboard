@@ -61,14 +61,11 @@ jobs:
       - name: Run common module tests
         run: mvn -pl common test
 
-      - name: Run dao module tests
-        run: mvn -pl dao -am -Dtest=*ValidatorTest test
+      - name: Run rule-engine-api module tests
+        run: mvn -pl rule-engine/rule-engine-api test
 
-      - name: Run edqs module tests
-        run: mvn -pl edqs test
-
-      - name: Run netty-mqtt module tests
-        run: mvn -pl netty-mqtt test
+      - name: Run rule-engine-components module tests
+        run: mvn -pl rule-engine/rule-engine-components test
 
   exec:
     name: CD – Run ThingsBoard
