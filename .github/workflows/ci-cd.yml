@@ -45,7 +45,7 @@ jobs:
           cache: maven
 
       - name: Build ThingsBoard
-        run: mvn -T 2 clean -am package -DskipTests
+        run: mvn -T 2 clean install -DskipTests
 
   unit-tests:
     name: Unit tests
@@ -112,7 +112,7 @@ jobs:
           cache: maven
 
       - name: Build application
-        run: mvn -T 2 clean package -DskipTests
+        run: mvn -T 2 clean install -DskipTests
 
       - name: Initialize database
         run: |
