@@ -47,7 +47,7 @@ jobs:
         #  run: mvn -T 2 clean install -DskipTests
 
       - name: Run common module tests
-        run: mvn -pl common test
+        run: cd common; mvn test; cd ..
 
       - name: Run rule-engine-api module tests
         run: cd rule-engine; mvn test -pl rule-engine-api; cd ..
