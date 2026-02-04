@@ -35,7 +35,7 @@ jobs:
       - name: Set up Java 17
         uses: actions/setup-java@v4
         with:
-          distribution: temurin
+          distribution: corretto
           java-version: "17"
           cache: maven
 
@@ -54,7 +54,7 @@ jobs:
       - name: Set up Java 17
         uses: actions/setup-java@v4
         with:
-          distribution: temurin
+          distribution: corretto
           java-version: "17"
           cache: maven
 
@@ -91,29 +91,35 @@ jobs:
       - name: Set up Java 17
         uses: actions/setup-java@v4
         with:
-          distribution: temurin
+          distribution: corretto
           java-version: "17"
           cache: maven
+
+      - name: Set variables
+        run: MAVEN_OPTS="-Xmx1024m" NODE_OPTIONS="--max_old_space_size=4096"
 
       - name: Build application
         run: mvn -T 2 clean package -DskipTests
 
       - name: Initialize database
         run: |
-          java -cp application/target/*boot.jar \
+          java -cp application/target/thingsboard-4.4.0-SNAPSHOT-boot.jar \
             -Dloader.main=org.thingsboard.server.ThingsboardInstallApplication \
-            -Dinstall.load_demo=false \
+            -Dinstall.data_dir=application/target/data \
+            -Dinstall.load_demo=true \
+            -Dspring.jpa.hibernate.ddl-auto=none \
+            -Dinstall.upgrade=false \
             -Dspring.datasource.url=jdbc:postgresql://localhost:5432/thingsboard \
             -Dspring.datasource.username=postgres \
             -Dspring.datasource.password=postgres \
             org.springframework.boot.loader.launch.PropertiesLauncher
 
-      - name: Run ThingsBoard (temporary)
+      - name: Run ThingsBoard
         run: |
-          java -jar application/target/*boot.jar \
+          java -jar application/target/thingsboard-4.4.0-SNAPSHOT-boot.jar \
             --spring.datasource.url=jdbc:postgresql://localhost:5432/thingsboard \
             --spring.datasource.username=postgres \
-            --spring.datasource.password=postgres &
+            --spring.datasource.password=postgres
           sleep 60
 
       - name: Verify application is running
