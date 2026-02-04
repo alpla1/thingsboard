@@ -39,6 +39,9 @@ jobs:
           java-version: "17"
           cache: maven
 
+      - name: Set variables
+        run: MAVEN_OPTS="-Xmx1024m" NODE_OPTIONS="--max_old_space_size=4096"
+
       - name: Build ThingsBoard
         run: mvn -T 2 clean package -DskipTests
 
@@ -57,6 +60,9 @@ jobs:
           distribution: corretto
           java-version: "17"
           cache: maven
+
+      - name: Set variables
+        run: MAVEN_OPTS="-Xmx1024m" NODE_OPTIONS="--max_old_space_size=4096"
 
       - name: Run common module tests
         run: cd common; mvn test; cd ..
