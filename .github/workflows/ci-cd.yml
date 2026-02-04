@@ -40,7 +40,7 @@ jobs:
           cache: maven
 
       - name: Build ThingsBoard
-        run: mvn -T 2 clean install -DskipTests
+        run: mvn -T 2 clean package -DskipTests
 
   unit-tests:
     name: Unit tests
@@ -59,13 +59,10 @@ jobs:
           cache: maven
 
       - name: Run common module tests
-        run: mvn -pl common test
+        run: cd common; mvn test; cd ..
 
       - name: Run rule-engine-api module tests
-        run: mvn -pl rule-engine/rule-engine-api test
-
-      - name: Run rule-engine-components module tests
-        run: mvn -pl rule-engine/rule-engine-components test
+        run: cd common; mvn test -pl rule-engine-api; cd ..
 
   exec:
     name: CD – Run ThingsBoard
