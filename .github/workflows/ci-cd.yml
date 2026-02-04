@@ -72,6 +72,11 @@ jobs:
           java-version: "17"
           cache: maven
 
+      - name: Show Java and Maven version
+        run: |
+          java -version
+          mvn -version
+
       - name: Run common module tests
         #  run: cd common; mvn test; cd ..
         #run: cd common/script/script-api; mvn test; cd ../../..
