@@ -42,17 +42,15 @@ jobs:
           distribution: corretto
           java-version: "17"
 
-      - name: Clean ThingsBoard
-        run: mvn clean
-
       - name: Build ThingsBoard
-        run: mvn -pl common/script/script-api -am install -DskipTests
+        run: mvn clean install -DskipTests
         #  run: mvn -T 2 clean install -DskipTests
 
       - name: Run common module tests
-        #  run: cd common; mvn test; cd ..
-        #run: cd common/script/script-api; mvn test; cd ../../..
-        run: mvn -pl common/script/script-api test
+        run: mvn -pl common test
+
+      #- name: Run rule-engine-api module tests
+      #  run: cd rule-engine; mvn test -pl rule-engine-api; cd ..
 
   exec:
     name: CD – Run ThingsBoard
