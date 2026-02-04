@@ -45,8 +45,8 @@ jobs:
           cache: maven
 
       - name: Build ThingsBoard
-      #  run: mvn -T 2 clean install -DskipTests
-         run: mvn -pl common/script/script-api -am install -DskipTests
+        run: mvn -pl common/script/script-api -am install -DskipTests
+        #  run: mvn -T 2 clean install -DskipTests
 
   unit-tests:
     name: Unit tests
