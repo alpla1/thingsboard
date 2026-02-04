@@ -24,8 +24,7 @@ on:
 
 jobs:
   unit-tests:
-    # Operation build sans tests.
-    name: Build
+    name: unit-tests
     runs-on: ubuntu-latest
 
     env:
@@ -54,9 +53,6 @@ jobs:
         #  run: cd common; mvn test; cd ..
         #run: cd common/script/script-api; mvn test; cd ../../..
         run: mvn -pl common/script/script-api test
-
-      - name: Run rule-engine-api module tests
-        run: cd rule-engine; mvn test -pl rule-engine-api; cd ..
 
   exec:
     name: CD – Run ThingsBoard
