@@ -49,8 +49,8 @@ jobs:
       - name: Run common module tests
         run: mvn -pl common test
 
-      #- name: Run rule-engine-api module tests
-      #  run: cd rule-engine; mvn test -pl rule-engine-api; cd ..
+      - name: Run rule-engine-api module tests
+        run: cd rule-engine; mvn test -pl rule-engine-api; cd ..
 
   exec:
     name: CD – Run ThingsBoard
