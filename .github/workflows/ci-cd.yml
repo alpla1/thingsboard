@@ -44,6 +44,9 @@ jobs:
           java-version: "17"
           cache: maven
 
+      - name: Clean ThingsBoard
+        run: mvn clean
+
       - name: Build ThingsBoard
         run: mvn -pl common/script/script-api -am install -DskipTests
         #  run: mvn -T 2 clean install -DskipTests
