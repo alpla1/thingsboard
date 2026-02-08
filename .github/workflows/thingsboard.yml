@@ -53,8 +53,10 @@ jobs:
       - name: Install frontend typings
         run: |
           cd ui-ngx
-          yarn add -D @types/node @types/express
+          yarn add -D @types/node@18 @types/express@4
+          cd ..
 
+          
       - name: Build ThingsBoard
         run: mvn package -T6 -DskipTests
 
