@@ -1,13 +1,29 @@
 {
-  "compilerOptions": {
-    "outDir": "target/src",
-    "target": "es2016",
-    "module": "commonjs",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "skipLibCheck": true,
-    "strictPropertyInitialization": false
-  },
-  "exclude": ["node_modules", "target"]
+    "compilerOptions": {
+        "outDir": "./target/src",
+        "target": "es2016",
+        "module": "commonjs",
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "strict": true,
+        "skipLibCheck": true,
+        "strictPropertyInitialization": false,
+        "moduleResolution": "node",
+        "types": ["node"]
+    },
+    "files": [
+        "./server.ts",
+        "./api/httpServer.ts",
+        "./api/jsExecutor.models.ts",
+        "./api/jsExecutor.ts",
+        "./api/jsInvokeMessageProcessor.ts",
+        "./api/utils.ts",
+        "./config/logger.ts",
+        "./queue/kafkaTemplate.ts",
+        "./queue/queue.models.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "target"
+    ]
 }
