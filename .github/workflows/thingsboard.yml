@@ -48,7 +48,10 @@ jobs:
           node-version: 20
 
       - name: Remove npm lockfile
-        run: rm -f package-lock.json
+        run: |
+          cd ui-ngx
+          rm -f package-lock.json
+          cd ..
 
       - name: Install Yarn
         run: npm install -g yarn@1
