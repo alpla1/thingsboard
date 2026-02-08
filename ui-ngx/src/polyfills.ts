@@ -80,5 +80,4 @@ import 'core-js/es/array';
 
 
 import 'leaflet.markercluster';
-import 'leaflet.polylinedecorator';
 import 'leaflet-providers';

@@ -67,10 +67,10 @@ import ITooltipsterInstance = JQueryTooltipster.ITooltipsterInstance;
 
 export default abstract class LeafletMap {
 
-    markers: Map<string, Marker> = new Map();
-    polylines: Map<string, Polyline> = new Map();
-    polygons: Map<string, Polygon> = new Map();
-    circles: Map<string, Circle> = new Map();
+    markers: Map<string, Marker> = new Map<string, Marker>();
+    polylines: Map<string, Polyline> = new Map<string, Polyline>();
+    polygons: Map<string, Polygon> = new Map<string, Polygon>();
+    circles: Map<string, Circle> = new Map<string, Circle>();
     map: L.Map;
     options: WidgetUnitedMapSettings;
     bounds: L.LatLngBounds;
