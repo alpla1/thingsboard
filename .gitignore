@@ -39,3 +39,4 @@ rebuild-docker.sh
 .run
 **/target/**
 **/node_modules/**
+**/yarn.lock

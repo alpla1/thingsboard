@@ -43,7 +43,7 @@ jobs:
           cache: maven
 
       - name: Build ThingsBoard
-        run: mvn clean package -T6 -DskipTests
+        run: mvn package -T6 -DskipTests
 
       - name: Upload ThingsBoard artifact
         uses: actions/upload-artifact@v4
