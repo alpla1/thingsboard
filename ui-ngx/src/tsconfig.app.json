@@ -3,7 +3,7 @@
   "compilerOptions": {
     "outDir": "../out-tsc/app",
     "types": ["node", "jquery", "flot", "tooltipster", "tinycolor2", "js-beautify",
-       "raphael", "canvas-gauges", "systemjs"]
+       "raphael", "canvas-gauges", "systemjs", "leaflet", "leaflet.markercluster", "leaflet-polylinedecorator", "leaflet-providers"]
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
