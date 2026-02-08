@@ -56,7 +56,7 @@ L.Map.include({
     delete this._patterns[id];
 
     if (this._loaded) {
-      this.fire('patternremove', {pattern: pattern});
+      this.fire('patternremove', { pattern: pattern });
       pattern.fire('remove');
     }
 
@@ -76,7 +76,7 @@ L.Map.include({
 L.SVG.include({
   _superUpdateStyle: (L.SVG.prototype as any)._updateStyle,
 
-  _updateStyle: function (layer: L.Layer){
+  _updateStyle: function (layer: L.Layer) {
     this._superUpdateStyle(layer);
     const options: L.PathOptions = layer.options;
     if (options.fill && options.fillPattern) {
@@ -143,7 +143,7 @@ class SidebarControl extends L.Control<TB.SidebarControlOptions> implements L.TB
 
   onAdd(map: L.Map): HTMLElement {
     this.buttonContainer = $("<div>")
-    .attr('class', 'leaflet-bar');
+      .attr('class', 'leaflet-bar');
     return this.buttonContainer[0];
   }
 
@@ -165,33 +165,33 @@ class SidebarPaneControl<O extends TB.SidebarPaneControlOptions> extends L.Contr
   addTo(map: L.Map): this {
 
     this.button = $("<a>")
-    .attr('class', 'tb-control-button')
-    .attr('href', '#')
-    .attr('role', 'button')
-    .html('<div class="' + this.options.uiClass + '"></div>')
-    .on('click', (e) => {
-      this.toggle(e);
-    });
+      .attr('class', 'tb-control-button')
+      .attr('href', '#')
+      .attr('role', 'button')
+      .html('<div class="' + this.options.uiClass + '"></div>')
+      .on('click', (e) => {
+        this.toggle(e);
+      });
     if (this.options.buttonTitle) {
       this.button.attr('title', this.options.buttonTitle);
     }
 
     this.$ui = $('<div>')
-        .attr('class', this.options.uiClass);
+      .attr('class', this.options.uiClass);
 
     $('<div class="tb-layers-title-container">')
-    .appendTo(this.$ui)
-    .append($('<div class="tb-layers-title">')
-    .text(this.options.paneTitle))
-    .append($('<div>')
-    .append($('<button type="button" class="tb-button-close mdc-icon-button mat-mdc-icon-button">' +
-      '<span class="mat-mdc-button-persistent-ripple mdc-icon-button__ripple"></span>' +
-      '<span class="material-icons">close</span>' +
-      '</button>')
-    .attr('aria-label', 'Close')
-    .bind('click', (e) => {
-      this.toggle(e);
-    })));
+      .appendTo(this.$ui)
+      .append($('<div class="tb-layers-title">')
+        .text(this.options.paneTitle))
+      .append($('<div>')
+        .append($('<button type="button" class="tb-button-close mdc-icon-button mat-mdc-icon-button">' +
+          '<span class="mat-mdc-button-persistent-ripple mdc-icon-button__ripple"></span>' +
+          '<span class="material-icons">close</span>' +
+          '</button>')
+          .attr('aria-label', 'Close')
+          .bind('click', (e) => {
+            this.toggle(e);
+          })));
 
     this.options.sidebar.addPane(this.$ui, this.button);
 
@@ -202,7 +202,7 @@ class SidebarPaneControl<O extends TB.SidebarPaneControlOptions> extends L.Contr
     return this;
   }
 
-  public onAddPane(map: L.Map, button: JQuery<HTMLElement>, $ui: JQuery<HTMLElement>, toggle: (e: JQuery.MouseEventBase) => void) {}
+  public onAddPane(map: L.Map, button: JQuery<HTMLElement>, $ui: JQuery<HTMLElement>, toggle: (e: JQuery.MouseEventBase) => void) { }
 
   private toggle(e: JQuery.MouseEventBase) {
     e.stopPropagation();
@@ -222,29 +222,29 @@ class LayersControl extends SidebarPaneControl<TB.LayersControlOptions> implemen
     const paneId = guid();
     const layers = this.options.layers;
     const baseSection = $("<div>")
-    .attr('class', 'tb-layers-container')
-    .appendTo($ui);
+      .attr('class', 'tb-layers-container')
+      .appendTo($ui);
 
     layers.forEach((layerData, i) => {
       const id = `map-ui-layer-${paneId}-${i}`;
       const buttonContainer = $('<div class="tb-layer-card">')
-      .appendTo(baseSection);
+        .appendTo(baseSection);
       const mapContainer = $('<div class="tb-layer-map">')
-      .appendTo(buttonContainer);
+        .appendTo(buttonContainer);
       const input = $('<input type="radio" class="tb-layer-button" name="layer">')
-      .prop('id', id)
-      .prop('checked', map.hasLayer(layerData.layer))
-      .appendTo(buttonContainer);
+        .prop('id', id)
+        .prop('checked', map.hasLayer(layerData.layer))
+        .appendTo(buttonContainer);
 
       const item = $('<label class="tb-layer-label">')
-      .prop('for', id)
-      .append($('<span>').append(layerData.title))
-      .appendTo(buttonContainer);
+        .prop('for', id)
+        .append($('<span>').append(layerData.title))
+        .appendTo(buttonContainer);
 
       map.whenReady(() => {
 
         const miniMap = L.map(mapContainer[0], { attributionControl: false, zoomControl: false, keyboard: false })
-        .addLayer(layerData.mini);
+          .addLayer(layerData.mini);
 
         miniMap.dragging.disable();
         miniMap.touchZoom.disable();
@@ -302,23 +302,23 @@ class GroupsControl extends SidebarPaneControl<TB.GroupsControlOptions> implemen
     const paneId = guid();
     const groups = this.options.groups;
     const baseSection = $("<div>")
-    .attr('class', 'tb-layers-container')
-    .appendTo($ui);
+      .attr('class', 'tb-layers-container')
+      .appendTo($ui);
 
     groups.forEach((groupData, i) => {
       const id = `map-group-layer-${paneId}-${i}`;
       const checkBoxContainer = $('<div class="tb-group-checkbox">')
-      .appendTo(baseSection);
+        .appendTo(baseSection);
       const input = $('<input type="checkbox" class="tb-group-button" name="group">')
-      .prop('id', id)
-      .prop('checked', groupData.enabled)
-      .appendTo(checkBoxContainer);
+        .prop('id', id)
+        .prop('checked', groupData.enabled)
+        .appendTo(checkBoxContainer);
 
       $('<label class="tb-group-label">')
-      .prop('title', groupData.title)
-      .prop('for', id)
-      .append($('<span>').append(groupData.title))
-      .appendTo(checkBoxContainer);
+        .prop('title', groupData.title)
+        .prop('for', id)
+        .append($('<span>').append(groupData.title))
+        .appendTo(checkBoxContainer);
       input.on('click', (e: JQuery.MouseEventBase) => {
         e.stopPropagation();
         groupData.enabled = !groupData.enabled;
@@ -329,7 +329,7 @@ class GroupsControl extends SidebarPaneControl<TB.GroupsControlOptions> implemen
           }
         );
         if (changed) {
-          map.fire('layergroupchange', {group: groupData});
+          map.fire('layergroupchange', { group: groupData });
         }
       });
 
@@ -347,14 +347,14 @@ class TopToolbarButton implements L.TB.TopToolbarButton {
   private _onClick: (e: MouseEvent, button: TopToolbarButton) => void;
 
   constructor(private readonly options: TB.TopToolbarButtonOptions,
-              private readonly iconRegistry: MatIconRegistry) {
+    private readonly iconRegistry: MatIconRegistry) {
     const iconElement = $('<div class="tb-control-button-icon"></div>');
     const setIcon = isNotEmptyStr(this.options.icon);
     const setTitle = isNotEmptyStr(this.options.title);
     this.button = $("<a>")
-    .attr('class', 'tb-control-button tb-control-text-button')
-    .attr('href', '#')
-    .attr('role', 'button');
+      .attr('class', 'tb-control-button tb-control-text-button')
+      .attr('href', '#')
+      .attr('role', 'button');
     if (setIcon) {
       this.button.append(iconElement);
       this.loadIcon(iconElement);
@@ -380,7 +380,7 @@ class TopToolbarButton implements L.TB.TopToolbarButton {
   }
 
   onClick(onClick: (e: MouseEvent, button: TopToolbarButton) => void): void {
-   this._onClick = onClick;
+    this._onClick = onClick;
   }
 
   private loadIcon(iconElement: JQuery<HTMLElement>) {
@@ -458,10 +458,10 @@ class ToolbarButton implements L.TB.ToolbarButton {
     this.id = options.id;
     const buttonText = this.options.showText ? this.options.title : null;
     this.button = $("<a>")
-    .attr('class', 'tb-control-button')
-    .attr('href', '#')
-    .attr('role', 'button')
-    .html('<div class="'+this.options.iconClass+'"></div>' + (buttonText ? `<div class="tb-control-text">${buttonText}</div>` : ''));
+      .attr('class', 'tb-control-button')
+      .attr('href', '#')
+      .attr('role', 'button')
+      .html('<div class="' + this.options.iconClass + '"></div>' + (buttonText ? `<div class="tb-control-text">${buttonText}</div>` : ''));
     if (this.options.showText) {
       L.DomUtil.addClass(this.button[0], 'tb-control-text-button');
     } else {
@@ -561,7 +561,7 @@ class ToolbarControl extends L.Control<L.ControlOptions> implements L.TB.Toolbar
 
   onAdd(map: L.Map): HTMLElement {
     this.buttonContainer = $("<div>")
-    .attr('class', 'leaflet-bar');
+      .attr('class', 'leaflet-bar');
     return this.buttonContainer[0];
   }
 
@@ -603,11 +603,11 @@ class BottomToolbarControl implements L.TB.BottomToolbarControl {
 
     if (showCloseButton) {
       const closeButton = $("<a>")
-      .attr('class', 'tb-control-button')
-      .attr('href', '#')
-      .attr('role', 'button')
-      .attr('title', this.options.closeTitle)
-      .html('<div class="tb-close"></div>');
+        .attr('class', 'tb-control-button')
+        .attr('href', '#')
+        .attr('role', 'button')
+        .attr('title', this.options.closeTitle)
+        .html('<div class="tb-close"></div>');
 
       closeButton.on('click', (e) => {
         e.stopPropagation();
@@ -643,11 +643,11 @@ class Pattern extends L.Evented implements L.TB.Pattern {
     patternUnits: 'userSpaceOnUse',
     patternContentUnits: 'userSpaceOnUse'
   };
-  private _elements: {[id: string]: PatternElement} = {};
+  private _elements: { [id: string]: PatternElement } = {};
 
   constructor(options: L.TB.PatternOptions) {
     super();
-    this.options = {...this.options, ...options};
+    this.options = { ...this.options, ...options };
   }
 
   onAdd(map: L.Map): void {
@@ -664,7 +664,7 @@ class Pattern extends L.Evented implements L.TB.Pattern {
     this._addDom();
     this.redraw();
     this.fire('add');
-    this._map.fire('patternadd', {pattern: this});
+    this._map.fire('patternadd', { pattern: this });
   }
 
   onRemove(_map: L.Map): void {
@@ -715,7 +715,7 @@ class Pattern extends L.Evented implements L.TB.Pattern {
     element.onAdd(this);
   }
 
-  _createElement<E extends SVGElement> (name: string): E {
+  _createElement<E extends SVGElement>(name: string): E {
     return document.createElementNS("http://www.w3.org/2000/svg", name) as E;
   }
 
@@ -749,7 +749,7 @@ class Pattern extends L.Evented implements L.TB.Pattern {
 
     if (options.patternTransform || options.angle) {
       let transform = options.patternTransform ? options.patternTransform + " " : "";
-      transform += options.angle ?  "rotate(" + options.angle + ") " : "";
+      transform += options.angle ? "rotate(" + options.angle + ") " : "";
       dom.setAttribute('patternTransform', transform);
     } else {
       dom.removeAttribute('patternTransform');
@@ -774,8 +774,8 @@ class Pattern extends L.Evented implements L.TB.Pattern {
     }
   }
 
-  protected _addElements() {};
-  protected _update() {};
+  protected _addElements() { };
+  protected _update() { };
 
 }
 
@@ -788,7 +788,7 @@ abstract class PatternElement<O extends L.TB.PatternElementOptions = L.TB.Patter
 
   protected constructor(options: L.TB.PatternElementOptions) {
     super();
-    this.options = {...this._defaultOptions(), ...options};
+    this.options = { ...this._defaultOptions(), ...options };
   }
 
   onAdd(pattern: Pattern): void {
@@ -819,7 +819,7 @@ abstract class PatternElement<O extends L.TB.PatternElementOptions = L.TB.Patter
     return this;
   }
 
-  _createElement<E extends SVGElement> (name: string): E {
+  _createElement<E extends SVGElement>(name: string): E {
     return document.createElementNS("http://www.w3.org/2000/svg", name) as E;
   }
 
@@ -835,10 +835,10 @@ abstract class PatternElement<O extends L.TB.PatternElementOptions = L.TB.Patter
     this._pattern._dom.appendChild(this._dom);
   }
 
-  _updateStyle(): void {}
+  _updateStyle(): void { }
 
-  protected _initDom() {}
-  protected _updateElement() {}
+  protected _initDom() { }
+  protected _updateElement() { }
 
   protected abstract _defaultOptions(): O;
 }
@@ -950,7 +950,7 @@ class PatternPath extends PatternShape<L.TB.PatternPathOptions> implements L.TB.
   }
 
   protected _defaultOptions(): L.TB.PatternPathOptions {
-    return {...defaultPatternShapeOptions};
+    return { ...defaultPatternShapeOptions };
   }
 }
 
@@ -992,7 +992,7 @@ class PatternImage extends PatternElement<L.TB.PatternImageOptions> implements L
     }
     if (transforms.length) {
       this._dom.setAttribute('transform', transforms.join(' '));
-      this._dom.setAttribute('transform-origin', `${options.width/2} ${options.height/2}`);
+      this._dom.setAttribute('transform-origin', `${options.width / 2} ${options.height / 2}`);
     }
   }
 
@@ -1074,7 +1074,7 @@ class ChinaProvider extends L.TileLayer implements L.TB.TileLayer.ChinaProvider 
       data['-y'] = invertedY;
     }
     data.sx = data.x >> 4;
-    data.sy = (( 1 << data.z) - data.y) >> 4;
+    data.sy = ((1 << data.z) - data.y) >> 4;
     return L.Util.template(this._url, L.Util.extend(data, this.options));
   }
 }
@@ -1096,12 +1096,14 @@ class MapLibreGLLayer extends L.Layer implements TB.MapLibreGL.MapLibreGLLayer {
 
   constructor(options: TB.MapLibreGL.LeafletMapLibreGLMapOptions) {
     super();
-    options = {...options, ...{
+    options = {
+      ...options, ...{
         updateInterval: 32,
         padding: 0.1,
         interactive: false,
         pane: 'tilePane'
-    }};
+      }
+    };
     options.attribution = this._loadAttribution(options);
     this._prepareTransformRequest(options);
     L.setOptions(this, options);
@@ -1190,7 +1192,7 @@ class MapLibreGLLayer extends L.Layer implements TB.MapLibreGL.MapLibreGLLayer {
     const container = this._container = L.DomUtil.create('div', 'leaflet-gl-layer');
     const size = this.getSize();
     const offset = this._map.getSize().multiplyBy(this.options.padding);
-    container.style.width  = size.x + 'px';
+    container.style.width = size.x + 'px';
     container.style.height = size.y + 'px';
     const topLeft = this._map.containerPointToLayerPoint([0, 0]).subtract(offset);
     L.DomUtil.setPosition(container, this._roundPoint(topLeft));
@@ -1242,7 +1244,7 @@ class MapLibreGLLayer extends L.Layer implements TB.MapLibreGL.MapLibreGLLayer {
     this._transformGL(gl);
 
     if (gl.transform.width !== size.x || gl.transform.height !== size.y) {
-      container.style.width  = size.x + 'px';
+      container.style.width = size.x + 'px';
       container.style.height = size.y + 'px';
       gl.resize();
     } else {
@@ -1255,7 +1257,7 @@ class MapLibreGLLayer extends L.Layer implements TB.MapLibreGL.MapLibreGLLayer {
     const tr = gl._getTransformForUpdate();
     tr.setCenter(MapLibreGLLngLat.convert([center.lng, center.lat]));
     tr.setZoom(this._map.getZoom() - 1);
-    gl.transform.apply(tr);
+    gl.transform.apply(tr, false);
     gl._fireMoveEvents();
   }
 
@@ -1272,12 +1274,12 @@ class MapLibreGLLayer extends L.Layer implements TB.MapLibreGL.MapLibreGLLayer {
     const viewHalf = this.getSize().divideBy(2);
 
     const topLeft = this._map.project(e.center, e.zoom)
-    .subtract(viewHalf)
-    .add((this._map as any)._getMapPanePos()
-    .add(padding)).round();
+      .subtract(viewHalf)
+      .add((this._map as any)._getMapPanePos()
+        .add(padding)).round();
 
     const offset = this._map.project(this._map.getBounds().getNorthWest(), e.zoom)
-                         .subtract(topLeft);
+      .subtract(topLeft);
 
     L.DomUtil.setTransform(
       this._actualCanvas,
@@ -1333,13 +1335,13 @@ class MapLibreGLLayer extends L.Layer implements TB.MapLibreGL.MapLibreGLLayer {
       const style = options.style;
       if (typeof style !== 'string' && style?.sources) {
         return Object.keys(style.sources)
-        .map((sourceId) => {
-          const source = style.sources[sourceId];
-          return (source && source.type !== 'video' && source.type !== 'image'
-            && typeof source.attribution === 'string') ? source.attribution.trim() : null;
-        })
-        .filter(Boolean) // Remove null/undefined values
-        .join(', ');
+          .map((sourceId) => {
+            const source = style.sources[sourceId];
+            return (source && source.type !== 'video' && source.type !== 'image'
+              && typeof source.attribution === 'string') ? source.attribution.trim() : null;
+          })
+          .filter(Boolean) // Remove null/undefined values
+          .join(', ');
       }
     }
     return '';
@@ -1364,7 +1366,7 @@ class MapLibreGLLayer extends L.Layer implements TB.MapLibreGL.MapLibreGLLayer {
               }
             }
           }
-          return {url};
+          return { url };
         };
       }
     }
