@@ -41,6 +41,14 @@ jobs:
           distribution: corretto
           java-version: "17"
           cache: maven
+    
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install Yarn
+        run: npm install -g yarn@1
 
       - name: Build ThingsBoard
         run: mvn package -T6 -DskipTests
