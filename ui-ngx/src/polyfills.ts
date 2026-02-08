@@ -77,3 +77,8 @@ import 'core-js/es/array';
  */
 
 (window as any).GAUGES_NO_AUTO_INIT = true;
+
+
+import 'leaflet.markercluster';
+import 'leaflet.polylinedecorator';
+import 'leaflet-providers';
