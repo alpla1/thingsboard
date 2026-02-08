@@ -40,10 +40,9 @@ jobs:
         with:
           distribution: corretto
           java-version: "17"
-          cache: maven
 
       - name: Build ThingsBoard
-        run: mvn -T2 license:format install -DskipTests
+        run: mvn clean install -DskipTests
 
       - name: Upload ThingsBoard artifact
         uses: actions/upload-artifact@v4
