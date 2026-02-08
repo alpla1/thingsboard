@@ -14,15 +14,64 @@
 /// limitations under the License.
 ///
 
-import { TestBed } from '@angular/core/testing';
 
 import { AuthService } from './auth.service';
 
-describe('AuthService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+describe('AuthService parsePublicId()', () => {
 
-  it('should be created', () => {
-    const service: AuthService = TestBed.get(AuthService);
-    expect(service).toBeTruthy();
+  let service: AuthService;
+
+  beforeEach(() => {
+    // Create instance WITHOUT constructor
+    service = Object.create(AuthService.prototype);
+
+    // Mock jwtHelper
+    (service as any).jwtHelper = {
+      decodeToken: jest.fn()
+    };
   });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  it('should return public id when token is public', () => {
+
+    jest.spyOn(AuthService, 'getJwtToken')
+      .mockReturnValue('fake-token');
+
+    (service as any).jwtHelper.decodeToken.mockReturnValue({
+      isPublic: true,
+      sub: 'PUBLIC_ID_123'
+    });
+
+    const result = service.parsePublicId();
+
+    expect(result).toBe('PUBLIC_ID_123');
+  });
+
+  it('should return null when token is not public', () => {
+
+    jest.spyOn(AuthService, 'getJwtToken')
+      .mockReturnValue('fake-token');
+
+    (service as any).jwtHelper.decodeToken.mockReturnValue({
+      isPublic: false
+    });
+
+    const result = service.parsePublicId();
+
+    expect(result).toBeNull();
+  });
+
+  it('should return null when no token exists', () => {
+
+    jest.spyOn(AuthService, 'getJwtToken')
+      .mockReturnValue(null);
+
+    const result = service.parsePublicId();
+
+    expect(result).toBeNull();
+  });
+
 });

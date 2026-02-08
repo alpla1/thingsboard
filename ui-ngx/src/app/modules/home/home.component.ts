@@ -24,7 +24,6 @@ import { PageComponent } from '@shared/components/page.component';
 import { AppState } from '@core/core.state';
 import { getCurrentAuthState } from '@core/auth/auth.selectors';
 import { MediaBreakpoints } from '@shared/models/constants';
-import screenfull from 'screenfull';
 import { MatSidenav } from '@angular/material/sidenav';
 import { AuthState } from '@core/auth/auth.models';
 import { WINDOW } from '@core/services/window.service';
@@ -34,6 +33,8 @@ import { RouterTabsComponent } from '@home/components/router-tabs.component';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { isDefined, isDefinedAndNotNull } from '@core/utils';
+import { getTime } from './home-time.util';
+import screenfull from 'screenfull';
 
 @Component({
   selector: 'tb-home',
@@ -166,6 +167,8 @@ export class HomeComponent extends PageComponent implements AfterViewInit, OnIni
       this.searchableComponent = null;
     }
   }
+
+  displayTime = getTime;
 
   displaySearchMode(): boolean {
     return this.searchEnabled && this.showSearch;

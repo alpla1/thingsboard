@@ -67,4 +67,11 @@
     overflow: auto;
     position: relative;
   }
+
+  #time-button {
+    width: fit-content;
+    height: 24px;
+    border-color: black;
+    border-style: solid;
+  }
 }
