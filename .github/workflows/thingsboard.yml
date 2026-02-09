@@ -125,12 +125,12 @@ jobs:
         run: |
           set -e
               
-          ls -la $GITHUB_WORKSPACE/application/src/main/data/resources
-          ls -la $GITHUB_WORKSPACE/application/src/main/data/resources/sql
+          ls dao/src/main/resources
+          ls dao/src/main/resources/sql
               
           java -cp application/target/thingsboard-4.4.0-SNAPSHOT-boot.jar \
             -Dloader.main=org.thingsboard.server.ThingsboardInstallApplication \
-            -Dinstall.data_dir=$GITHUB_WORKSPACE/application/src/main/data/resources \
+            -Dinstall.data_dir=dao/src/main/resources \
             -Dinstall.load_demo=true \
             -Dspring.jpa.hibernate.ddl-auto=none \
             -Dinstall.upgrade=false \
@@ -138,6 +138,7 @@ jobs:
             -Dspring.datasource.username=postgres \
             -Dspring.datasource.password=postgres \
             org.springframework.boot.loader.launch.PropertiesLauncher
+
 
 
       - name: Start, verify and stop ThingsBoard
