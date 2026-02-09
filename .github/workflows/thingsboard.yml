@@ -40,6 +40,8 @@ jobs:
         with:
           distribution: corretto
           java-version: "17"
+          cache: maven
+
 
       - name: Build ThingsBoard
         run: mvn clean install -DskipTests
@@ -78,10 +80,10 @@ jobs:
           path: application/target
 
       - name: Data tests
-        run: cd common; mvn -pl data test
+        run: cd common; mvn -pl data test; cd ..
 
       - name: Proto tests
-        run: cd common; mvn -pl proto test
+        run: cd common; mvn -pl proto -am test; cd ..
 
   exec:
     name: Run ThingsBoard
