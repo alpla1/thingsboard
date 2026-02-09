@@ -42,7 +42,7 @@ jobs:
           java-version: "17"
 
       - name: Build ThingsBoard
-        run: mvn -T2 clean install -DskipTests
+        run: mvn clean install -DskipTests
 
       - name: Upload ThingsBoard artifact
         uses: actions/upload-artifact@v4
