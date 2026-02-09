@@ -122,14 +122,13 @@ jobs:
           path: application/target
 
       - name: Initialize database
-        working-directory: ${{ github.workspace }}
         run: |
           set -e
               
           java -cp application/target/thingsboard-4.4.0-SNAPSHOT-boot.jar \
             -Dloader.main=org.thingsboard.server.ThingsboardInstallApplication \
-            -Dinstall.data_dir=dao/src/main/resources \
-            -Dinstall.resources_dir=application/src/main/resources \
+            -Dinstall.data_dir=$GITHUB_WORKSPACE/dao/src/main/resources \
+            -Dinstall.resources_dir=$GITHUB_WORKSPACE/application/src/main/resources \
             -Dinstall.load_demo=true \
             -Dspring.jpa.hibernate.ddl-auto=none \
             -Dinstall.upgrade=false \
@@ -137,6 +136,7 @@ jobs:
             -Dspring.datasource.username=postgres \
             -Dspring.datasource.password=postgres \
             org.springframework.boot.loader.launch.PropertiesLauncher
+
 
 
 
