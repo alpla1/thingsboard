@@ -41,12 +41,6 @@ jobs:
           distribution: corretto
           java-version: "17"
 
-      - name: Build js-executor
-        run: |
-          cd msa/js-executor
-          yarn install --frozen-lockfile
-          yarn run pkg
-
       - name: Build ThingsBoard
         run: mvn clean install -DskipTests
 
