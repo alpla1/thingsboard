@@ -125,12 +125,10 @@ jobs:
         run: |
           set -e
               
-          ls dao/src/main/resources
-          ls dao/src/main/resources/sql
-              
           java -cp application/target/thingsboard-4.4.0-SNAPSHOT-boot.jar \
             -Dloader.main=org.thingsboard.server.ThingsboardInstallApplication \
             -Dinstall.data_dir=dao/src/main/resources \
+            -Dinstall.resources_dir=application/src/main/resources \
             -Dinstall.load_demo=true \
             -Dspring.jpa.hibernate.ddl-auto=none \
             -Dinstall.upgrade=false \
