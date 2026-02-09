@@ -80,8 +80,8 @@ jobs:
       - name: Data tests
         run: cd common; mvn -pl data test
 
-      - name: Cache tests
-        run: mvn -pl cache test; cd ..
+      - name: Proto tests
+        run: cd common; mvn -pl proto test
 
   exec:
     name: Run ThingsBoard
