@@ -78,10 +78,10 @@ jobs:
           path: application/target
 
       - name: Data tests
-        run: cd common && mvn -pl data test
+        run: cd common; mvn -pl data test
 
       - name: Proto tests
-        run: mvn -pl proto test
+        run: mvn -pl proto test; cd ..
 
   exec:
     name: Run ThingsBoard
