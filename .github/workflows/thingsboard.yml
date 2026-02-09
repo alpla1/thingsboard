@@ -124,9 +124,13 @@ jobs:
       - name: Initialize database
         run: |
           set -e
+              
+          ls -la $GITHUB_WORKSPACE/application/src/main/data
+          ls -la $GITHUB_WORKSPACE/application/src/main/data/sql
+              
           java -cp application/target/thingsboard-4.4.0-SNAPSHOT-boot.jar \
             -Dloader.main=org.thingsboard.server.ThingsboardInstallApplication \
-            -Dinstall.data_dir=application/src/main/data \
+            -Dinstall.data_dir=$GITHUB_WORKSPACE/application/src/main/data \
             -Dinstall.load_demo=true \
             -Dspring.jpa.hibernate.ddl-auto=none \
             -Dinstall.upgrade=false \
